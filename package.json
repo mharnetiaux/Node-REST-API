@@ -1,7 +1,7 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "development api",
+  "description": "Node REST API",
   "main": "server.js",
   "scripts": {
     "start": "babel-node ./server.js",
