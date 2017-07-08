@@ -10,9 +10,9 @@ import morgan from 'morgan';
 const app = express(),
       port = process.env.PORT || 8081,
       db = mongoose.connection,
-	  options = {
+      options = {
         useMongoClient: true
-	  };
+      };
 
 mongoose.Promise = bluebird;
 mongoose.connect(config.DBHost, options);
