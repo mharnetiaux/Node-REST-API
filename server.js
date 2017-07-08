@@ -32,7 +32,7 @@ app.get("/", (req, res) => res.json({message: "You have arrived!"}));
 
 app.route("/item")
 	.get(item.getItems)
-    .post(item.postItems);
+    .post(item.postItem);
 
 app.listen(port, () => {
     console.log("Server listening on port:" + port);
