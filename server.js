@@ -3,10 +3,16 @@ import mongoose from 'mongoose';
 import Items from './src/models/items';
 import bodyParser from 'body-parser';
 import bluebird from 'bluebird';
+import morgan from 'morgan';
+import config from 'config';
 
 const app = express(),
     port = process.env.PORT || 3000,
     routes = require('./src/routes/items');
+
+if (config.util.getEnv('NODE_ENV') !== 'test') {
+    app.use(morgan('combined'));
+}
 
 
 mongoose.Promise = bluebird;

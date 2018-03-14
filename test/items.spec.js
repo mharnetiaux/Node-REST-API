@@ -1,6 +1,6 @@
 process.env.NODE_ENV = 'test';
 import mongoose from 'mongoose';
-import Item from '../src/models/items';
+import Items from '../src/models/items';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
