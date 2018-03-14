@@ -2,13 +2,15 @@ import express from 'express';
 import mongoose from 'mongoose';
 import Items from './src/models/items';
 import bodyParser from 'body-parser';
+import bluebird from 'bluebird';
 
 const app = express(),
     port = process.env.PORT || 3000,
     routes = require('./src/routes/items');
 
 
-mongoose.Promise = global.Promise;
+//mongoose.Promise = global.Promise;
+mongoose.Promise = bluebird;
 mongoose.connect('127.0.0.1:27017/items');
 
 
