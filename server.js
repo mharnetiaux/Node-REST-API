@@ -9,7 +9,6 @@ const app = express(),
     routes = require('./src/routes/items');
 
 
-//mongoose.Promise = global.Promise;
 mongoose.Promise = bluebird;
 mongoose.connect('127.0.0.1:27017/items');
 

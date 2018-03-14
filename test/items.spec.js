@@ -1,6 +1,6 @@
 process.env.NODE_ENV = 'test';
 import mongoose from 'mongoose';
-import Item from '../src/models/item';
+import Item from '../src/models/items';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
@@ -8,15 +8,15 @@ chai.use(chaiHttp).should();
 
 describe('Items', () => {
     beforeEach((done) => {
-        Item.remove({}, (err) => {
+        Items.remove({}, (err) => {
             done();
         });
     });
 
-    describe('/GET item', () => {
-        it('it should GET all the items', (done) => {
+    describe('/GET Items', () => {
+        it('it should GET all the Items', (done) => {
             chai.request(server)
-                .get('/item')
+                .get('/items')
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
@@ -27,12 +27,12 @@ describe('Items', () => {
     });
 
 
-    describe('/POST item', () => {
+    describe('/POST Items', () => {
         const item = {};
 
-        it('it should not POST item without item field', (done) => {
+        it('it should not POST Items without item field', (done) => {
             chai.request(server)
-                .post('/item')
+                .post('/items')
                 .send(item)
                 .end((err, res) => {
                     res.should.have.status(200);
