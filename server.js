@@ -1,46 +1,27 @@
 import express from 'express';
-import body_parser from 'body-parser';
 import mongoose from 'mongoose';
-import bluebird from 'bluebird';
+import Items from './src/models/items';
 import bodyParser from 'body-parser';
-import config from 'config';
-import item from './src/routes/item';
-import morgan from 'morgan';
 
 const app = express(),
-      port = process.env.PORT || 8081,
-      db = mongoose.connection,
-      options = {
-        useMongoClient: true
-      };
-
-mongoose.Promise = bluebird;
-mongoose.connect(config.DBHost, options);
-db.on('error', console.error.bind(console,'db connection error:'));
-
-if(config.util.getEnv('NODE_ENV') !== 'test'){
-	app.use(morgan('combined'));
-}
-
-app.use(body_parser.urlencoded({extended:true}));
-app.use(body_parser.json());
-app.use(bodyParser.text());
-app.use(bodyParser.json({ type: 'application/json'}));
+    port = process.env.PORT || 3000,
+    routes = require('./src/routes/items');
 
 
-app.get("/", (req, res) => res.json({message: "You have arrived!"}));
+mongoose.Promise = global.Promise;
+mongoose.connect('127.0.0.1:27017/items');
 
-app.route("/item")
-	.get(item.getItems)
-    .post(item.postItem);
 
-app.listen(port, () => {
-    console.log("Server listening on port:" + port);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+routes(app);
+
+app.use(function(req, res) {
+    res.status(404).send({ url: req.originalUrl + ' not found' })
 });
 
-export default app;
+app.listen(port);
 
-
-
-
-
+console.log('todo list RESTful API server started on: ' + port);

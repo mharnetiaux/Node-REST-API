@@ -6,9 +6,9 @@ import chaiHttp from 'chai-http';
 import server from '../server';
 chai.use(chaiHttp).should();
 
-describe('Items', ()=>{
-    beforeEach((done)=>{
-        Item.remove({},(err)=>{
+describe('Items', () => {
+    beforeEach((done) => {
+        Item.remove({}, (err) => {
             done();
         });
     });
@@ -29,7 +29,7 @@ describe('Items', ()=>{
 
     describe('/POST item', () => {
         const item = {};
-        
+
         it('it should not POST item without item field', (done) => {
             chai.request(server)
                 .post('/item')
